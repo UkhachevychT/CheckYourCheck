@@ -13,6 +13,7 @@ import { ProductService } from './shared/services/product.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DragDropDirective } from './directives/drag-drop.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { UserService } from './shared/services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,11 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatProgressSpinnerModule,
     MatButtonModule
   ],
-  providers: [ProductService, HttpClient],
+  providers: [
+    ProductService, 
+    HttpClient,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

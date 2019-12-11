@@ -1,1 +1,22 @@
-<h3>Home</h3>
+<p *ngIf="!(users | async)" class="text-center"><em>Loading...</em></p>
+<app-file-upload></app-file-upload>
+<table class="table table-sm table-hover" *ngIf="(users | async)?.length>0">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Title</th>
+            <th>Creator</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of (users | async)" (click)="logItem(user)">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <ul *ngFor="let check of user.checks">
+                    <li>{{ check.name }}</li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
