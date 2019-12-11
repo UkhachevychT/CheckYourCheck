@@ -9,22 +9,28 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule } from '@angular/material/button';
-
+import { ProductService } from './shared/services/product.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DragDropDirective } from './directives/drag-drop.directive';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AboutComponent
+    AboutComponent,
+    DragDropDirective,
+    FileUploadComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [ProductService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
