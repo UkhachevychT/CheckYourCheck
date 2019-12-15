@@ -5,8 +5,8 @@ export class Check{
     name: string
     location: string
     products: Array<Product>
-    //total: number //?
-    File: File
+    date: Date
+    file: File
 
     constructor() {
     }

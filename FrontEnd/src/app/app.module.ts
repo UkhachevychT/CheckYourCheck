@@ -9,11 +9,18 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutComponent } from './about/about.component';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductService } from './shared/services/product.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DragDropDirective } from './directives/drag-drop.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { UserService } from './shared/services/user.service';
+import { CheckService } from './shared/services/check.service';
+import { MatTableModule } from '@angular/material/table';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'; 
+import {TextFieldModule} from '@angular/cdk/text-field'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatExpansionModule} from '@angular/material/expansion'; 
+
+
+import {MatCardModule} from '@angular/material/card'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +36,17 @@ import { UserService } from './shared/services/user.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    TextFieldModule,
+    MatFormFieldModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [
-    ProductService, 
+    CheckService,
     HttpClient,
-    UserService
   ],
   bootstrap: [AppComponent]
 })

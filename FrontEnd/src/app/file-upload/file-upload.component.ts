@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -8,21 +8,15 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class FileUploadComponent implements OnInit {
   @ViewChild('uploadIcon', { static: false }) uploadIcon: ElementRef
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef
-  files: Array<any>
+  @Output() onFilesUploaded: EventEmitter<File> = new EventEmitter<File>()
   constructor() { }
 
   ngOnInit() {
-    this.files = [];
   }
 
-  uploadEvent(event){
-    for (let index = 0; index < event.length; index++){
-      const element = event[index];
-      this.files.push(element.name)
+  uploadEvent(event: File[]) {
+    if (event && event.length > 0) {
+      this.onFilesUploaded.emit(event[event.length - 1])
     }
-  }
-
-  deleteAttachment(index){
-    this.files.splice(index, 1)
   }
 }

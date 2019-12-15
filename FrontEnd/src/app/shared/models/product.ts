@@ -3,7 +3,6 @@ export class Product {
     type: string
     quantity: number
     price: number
-    //total: number
 
     constructor() {
     }

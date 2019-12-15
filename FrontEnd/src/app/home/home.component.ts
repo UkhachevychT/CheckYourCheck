@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../shared/models/product';
-import { ProductService } from '../shared/services/product.service';
-import { Observable } from 'rxjs';
-import { UserService } from '../shared/services/user.service';
-import { User } from '../shared/models/user';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Check } from '../shared/models/check';
+import { CheckService } from '../shared/services/check.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +9,35 @@ import { User } from '../shared/models/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  products: Observable<Product[]>
-  users: Observable<User[]>
+  displayedColumns: string[] = ['name', 'type', 'quantity', 'price'];
+  lastCheck: Check
+  isRaw: boolean;
 
-  constructor(private UserService: UserService) { }
+  constructor(private CheckService: CheckService) { }
 
   ngOnInit() {
-    this.users = this.UserService.getUsers();
+    this.loadData();
+    this.isRaw = false;
   }
 
-  logItem(item: User) {
-    console.log(item);
+  loadData() {
+    this.CheckService.getCheck().subscribe((data) => {
+      this.lastCheck = data;
+    });
+  }
+
+  toggleView(e: MatSlideToggleChange) {
+    this.isRaw = e.checked;
+  }
+
+  getJsonValue(item) {
+    return JSON.stringify(item, null, 2);
+  }
+
+  checkYourCheck(event: File){
+    debugger;
+    this.CheckService.postImage(event).subscribe((data)=>{
+      this.lastCheck = data;
+    });
   }
 }
