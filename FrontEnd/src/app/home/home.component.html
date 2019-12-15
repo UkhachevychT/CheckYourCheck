@@ -1,35 +1,39 @@
 <app-file-upload (onFilesUploaded)="checkYourCheck($event)"></app-file-upload>
-<p *ngIf="!lastCheck" class="text-center my-5"><em>Loading...</em></p>
+<div *ngIf="!lastCheck" class="text-center my-5">
+    <p><i class="fas fa-sync fa-spin fa-2x"></i></p>
+    <p><em>Loading...</em></p>
+</div>
 <div *ngIf="lastCheck" class="container border rounded bg-white mb-3">
 
     <div>
-        <h3 class="text-center mt-3">Your Check <i class="fas fa-receipt"></i></h3>
+        <h3 class="text-center mt-3 mx-4">Your Check <i class="fas fa-receipt"></i></h3>
     </div>
 
-    <div class="float-right">
+    <div class="float-right  mx-4">
         <mat-slide-toggle (change)="toggleView($event)">Raw</mat-slide-toggle>
     </div>
 
     <br>
 
     <div class="my-3 mx-4">
+        <h5 class="text-center">Image</h5>
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Image
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-
-                <img src="{{lastCheck.file}}" alt="Image not awailable :(" class="w-100">
+                <div class="w-100 text-center">
+                    <img src="{{lastCheck.file}}" alt="Image not awailable :(" class="w-100">
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 
-    <div *ngIf="!isRaw">
+    <div *ngIf="!isRaw" class="mx-4">
         <div class="mb-3">
             <h5 class="text-center">General Info</h5>
-            <div class="mx-4">
+            <div >
                 <mat-card>
                     <p>Name: {{lastCheck.name}} </p>
                     <p>Location: {{lastCheck.location}} </p>
@@ -40,8 +44,7 @@
 
         <div class="mb-3">
             <h5 class="text-center">Products</h5>
-
-            <div class="mx-4">
+            <div>
                 <table mat-table [dataSource]="lastCheck.products" class="w-100 mat-elevation-z1">
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef>Name</th>
