@@ -1,5 +1,5 @@
 <app-file-upload (onFilesUploaded)="checkYourCheck($event)"></app-file-upload>
-<div *ngIf="!lastCheck" class="text-center my-5">
+<div *ngIf="loadingFile" class="text-center my-5">
     <p><i class="fas fa-sync fa-spin fa-2x"></i></p>
     <p><em>Loading...</em></p>
 </div>
@@ -8,10 +8,10 @@
     <div>
         <h3 class="text-center mt-3 mx-4">Your Check <i class="fas fa-receipt"></i></h3>
     </div>
-
+<!-- 
     <div class="float-right  mx-4">
         <mat-slide-toggle (change)="toggleView($event)">Raw</mat-slide-toggle>
-    </div>
+    </div> -->
 
     <br>
 
@@ -24,25 +24,31 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="w-100 text-center">
-                    <img src="{{lastCheck.file}}" alt="Image not awailable :(" class="w-100">
+                    <img src="{{lastCheck.image}}" alt="Image not awailable :(" class="max-width-100">
                 </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>
 
-    <div *ngIf="!isRaw" class="mx-4">
+    <div *ngIf="false" class="mx-4">
         <div class="mb-3">
             <h5 class="text-center">General Info</h5>
             <div >
-                <mat-card>
+                <!-- <mat-card>
                     <p>Name: {{lastCheck.name}} </p>
                     <p>Location: {{lastCheck.location}} </p>
                     <p>Date: {{lastCheck.date}} </p>
+                </mat-card> -->
+                <mat-card>
+                    <p>Shop: {{lastCheck.parsed_text.shop}} </p>
+                    <p>Date: {{lastCheck.parsed_text.date}} </p>
+                    <p>Tax: {{lastCheck.parsed_text.tax}} </p>
+                    <p>Total: {{lastCheck.parsed_text.total}} </p>
                 </mat-card>
             </div>
         </div>
 
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <h5 class="text-center">Products</h5>
             <div>
                 <table mat-table [dataSource]="lastCheck.products" class="w-100 mat-elevation-z1">
@@ -70,10 +76,10 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
             </div>
-        </div>
+        </div> -->
     </div>
 
-    <div *ngIf="isRaw" class="mb-3 mx-4">
+    <div *ngIf="true" class="mb-3 mx-4">
         <textarea rows="20" class="form-control " readonly> {{getJsonValue(lastCheck)}} </textarea>
     </div>
 </div>

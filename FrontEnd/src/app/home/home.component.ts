@@ -12,17 +12,19 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['name', 'type', 'quantity', 'price'];
   lastCheck: Check
   isRaw: boolean;
-
+  loadingFile: boolean;
   constructor(private CheckService: CheckService) { }
 
   ngOnInit() {
-    this.loadData();
+    //this.loadData();
     this.isRaw = false;
+    this.loadingFile = false;
   }
 
-  loadData() {
-    this.CheckService.getCheck().subscribe((data) => {
+  loadData(id:number) {
+    this.CheckService.getCheck(id).subscribe((data) => {
       this.lastCheck = data;
+      this.loadingFile = false;
     });
   }
 
@@ -34,10 +36,18 @@ export class HomeComponent implements OnInit {
     return JSON.stringify(item, null, 2);
   }
 
-  checkYourCheck(event: File){
-    debugger;
-    this.CheckService.postImage(event).subscribe((data)=>{
+  checkYourCheck(event){
+    this.loadingFile = true;
+    var check = new Check();
+    check.image = event;
+    check.id = 1;
+    check.upload_date = '2019-12-16T00:23:55Z';
+    this.CheckService.postImage(check).subscribe(
+      (data) => {
       this.lastCheck = data;
-    });
+    }, null, () => { 
+      this.loadingFile = false; 
+    }
+    );
   }
 }

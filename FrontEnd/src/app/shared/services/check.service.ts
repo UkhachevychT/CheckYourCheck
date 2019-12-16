@@ -10,18 +10,16 @@ export class CheckService {
 
   constructor(private http: HttpClient) { }
 
-  private FAKE_API = `http://localhost:3000/check`;
+  private FAKE_API = `http://da108f82.ngrok.io/api/v1/check/`;
 
-  postCheck(check: Check): Observable<Check> {
-    return this.http.post<Check>(this.FAKE_API, check, { headers: { 'Content-Type': 'application/json' } });
+  postImage(file): Observable<any> {
+    var form = new FormData();
+    form.append('image', file.image, file.image.name);
+    return this.http.post<any>(`${this.FAKE_API}`, form);
   }
 
-  postImage(file: File): Observable<Check> {
-    return this.http.post<Check>(this.FAKE_API, file);
-  }
-
-  getCheck(): Observable<Check> {
-    return this.http.get<Check>(this.FAKE_API);
+  getCheck(id:number): Observable<any> {
+    return this.http.get<Check>(`${this.FAKE_API}${id}`);
   }
 
 }
