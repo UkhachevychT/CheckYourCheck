@@ -1,0 +1,4 @@
+<div class="container uploadfilecontainer text-center" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadEvent($event)">
+    <i #uploadIcon class="fas fa-cloud-upload-alt fa-5x"></i>
+    <input #fileInput hidden type="file" (change)="uploadEvent($event.target.files)">
+</div>

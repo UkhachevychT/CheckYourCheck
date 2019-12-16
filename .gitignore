@@ -1,6 +1,6 @@
-
 # Created by https://www.gitignore.io/api/python,django,angular
 # Edit at https://www.gitignore.io/?templates=python,django,angular
+
 
 ### Angular ###
 ## Angular ##
@@ -33,6 +33,20 @@ e2e/*.map
 #System Files
 .DS_Store/
 
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
+# End of https://www.gitignore.io/api/angular,visualstudiocode
+=======
 ### Django ###
 *.log
 *.pot
@@ -200,3 +214,4 @@ venv
 # Pyre type checker
 
 # End of https://www.gitignore.io/api/python,django,angular
+
